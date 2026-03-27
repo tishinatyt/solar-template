@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[НАЗВА КОМПАНІЇ] — Сонячні електростанції під ключ | [МІСТО]</title>
+  <meta name="description" content="[НАЗВА КОМПАНІЇ] — встановлення сонячних електростанцій для дому та бізнесу в [МІСТО]. Гарантія [ГАРАНТІЯ] років. Безкоштовний виїзд спеціаліста." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:   #f97316;
+      --orange2:  #ea580c;
+      --yellow:   #fbbf24;
+      --yellow2:  #f59e0b;
+      --ora-lt:   #fff7ed;
+      --yel-lt:   #fffbeb;
+      --bg:       #f9fafb;
+      --white:    #ffffff;
+      --text:     #0f172a;
+      --mid:      #475569;
+      --muted:    #94a3b8;
+      --border:   #e2e8f0;
+      --dark:     #0f172a;
+      --green:    #16a34a;
+      --green-lt: #f0fdf4;
+      --radius:   10px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6; overflow-x: hidden;
+    }
+
+    /* ── UTILS ── */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+    .mono { font-family: 'DM Mono', monospace; }
+
+    .tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 600; letter-spacing: .07em;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 999px;
+    }
+    .tag-orange { background: var(--ora-lt); color: var(--orange2); }
+    .tag-yellow { background: var(--yel-lt); color: var(--yellow2); }
+    .tag-green  { background: var(--green-lt); color: var(--green); }
+    .tag-dark   { background: rgba(255,255,255,.15); color: #fff; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700;
+      padding: 13px 28px; border-radius: 999px; border: none;
+      cursor: pointer; text-decoration: none;
+      transition: transform .18s, box-shadow .18s, background .15s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-orange {
+      background: var(--orange); color: #fff;
+      box-shadow: 0 4px 20px rgba(249,115,22,.3);
+    }
+    .btn-orange:hover { background: var(--orange2); box-shadow: 0 8px 30px rgba(249,115,22,.45); }
+    .btn-yellow {
+      background: var(--yellow); color: var(--dark);
+      box-shadow: 0 4px 20px rgba(251,191,36,.35);
+    }
+    .btn-yellow:hover { background: var(--yellow2); }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 2px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--orange); color: var(--orange); background: var(--ora-lt); }
+    .btn-white {
+      background: #fff; color: var(--dark);
+    }
+    .btn-white:hover { background: var(--yel-lt); }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      background: var(--dark); color: rgba(255,255,255,.7);
+      font-size: 13px; padding: 9px 0;
+    }
+    .topbar-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    .topbar a { color: rgba(255,255,255,.85); text-decoration: none; }
+    .topbar a:hover { color: var(--yellow); }
+    .topbar .sep { color: rgba(255,255,255,.25); margin: 0 8px; }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--white); border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 1px 12px rgba(0,0,0,.06);
+    }
+    .header-inner {
+      display: flex; align-items: center; gap: 32px; padding: 16px 0;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .logo-mark {
+      width: 40px; height: 40px; background: linear-gradient(135deg, var(--orange), var(--yellow));
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .logo-text { font-size: 20px; font-weight: 800; color: var(--dark); }
+    .logo-text span { color: var(--orange); }
+
+    nav { flex: 1; }
+    .nav-list { display: flex; gap: 4px; list-style: none; }
+    .nav-list > li { position: relative; }
+    .nav-list > li > a {
+      display: block; padding: 8px 12px; font-size: 14px; font-weight: 600;
+      color: var(--mid); text-decoration: none; border-radius: 7px;
+      transition: color .15s, background .15s;
+    }
+    .nav-list > li > a:hover { color: var(--orange); background: var(--ora-lt); }
+    .nav-list > li.has-drop:hover > .dropdown { display: block; }
+    .dropdown {
+      display: none; position: absolute; top: calc(100% + 8px); left: 0;
+      background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+      padding: 8px; min-width: 200px; box-shadow: 0 8px 32px rgba(0,0,0,.12);
+      z-index: 200;
+    }
+    .dropdown a {
+      display: block; padding: 9px 14px; font-size: 14px; font-weight: 500;
+      color: var(--mid); text-decoration: none; border-radius: 7px;
+      transition: background .12s, color .12s;
+    }
+    .dropdown a:hover { background: var(--ora-lt); color: var(--orange); }
+
+    .header-cta { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .header-phone {
+      font-size: 15px; font-weight: 700; color: var(--dark);
+      text-decoration: none;
+    }
+    .header-phone:hover { color: var(--orange); }
+
+    /* ── HERO ── */
+    #hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1a2744 55%, #1e3a5f 100%);
+      padding: 80px 0 70px; position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .04;
+      background-image: radial-gradient(circle at 2px 2px, #fff 1px, transparent 0);
+      background-size: 40px 40px;
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr 420px; gap: 60px; align-items: center;
+    }
+    .hero-tag { margin-bottom: 20px; }
+    .hero-title {
+      font-size: clamp(32px, 4.5vw, 56px); font-weight: 900;
+      line-height: 1.1; color: #fff; letter-spacing: -.5px; margin-bottom: 20px;
+    }
+    .hero-title .accent { color: var(--yellow); }
+    .hero-sub {
+      font-size: 17px; color: rgba(255,255,255,.68); line-height: 1.7; margin-bottom: 36px; max-width: 500px;
+    }
+    .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-chips {
+      display: flex; gap: 20px; flex-wrap: wrap; margin-top: 44px;
+      padding-top: 36px; border-top: 1px solid rgba(255,255,255,.1);
+    }
+    .hero-chip {
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .hero-chip-val {
+      font-size: 22px; font-weight: 800; color: var(--yellow);
+      font-family: 'DM Mono', monospace;
+    }
+    .hero-chip-label { font-size: 12px; color: rgba(255,255,255,.55); font-weight: 500; }
+
+    /* Hero card */
+    .hero-card {
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 20px; padding: 28px; backdrop-filter: blur(10px);
+    }
+    .hero-card-title { font-size: 14px; font-weight: 600; color: rgba(255,255,255,.6); margin-bottom: 16px; text-transform: uppercase; letter-spacing: .06em; }
+    .hero-type-btns { display: flex; gap: 8px; margin-bottom: 20px; }
+    .hero-type-btn {
+      flex: 1; padding: 10px; border-radius: 8px; border: 1.5px solid rgba(255,255,255,.2);
+      background: transparent; color: rgba(255,255,255,.7); font-size: 14px; font-weight: 600;
+      cursor: pointer; transition: all .15s; font-family: 'Inter', sans-serif;
+    }
+    .hero-type-btn.active, .hero-type-btn:hover {
+      background: var(--orange); border-color: var(--orange); color: #fff;
+    }
+    .hero-stat { margin-bottom: 14px; }
+    .hero-stat-label { font-size: 12px; color: rgba(255,255,255,.5); margin-bottom: 4px; }
+    .hero-stat-val { font-size: 20px; font-weight: 800; color: #fff; font-family: 'DM Mono', monospace; }
+    .hero-stat-val span { color: var(--yellow); }
+    .hero-card-btn { width: 100%; margin-top: 8px; justify-content: center; font-size: 14px; }
+
+    /* ── STATS ── */
+    #stats {
+      background: var(--white); padding: 56px 0; border-bottom: 1px solid var(--border);
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    }
+    .stat-item {
+      text-align: center; padding: 24px;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-size: 40px; font-weight: 900; color: var(--dark);
+      font-family: 'DM Mono', monospace; letter-spacing: -.5px;
+      line-height: 1;
+    }
+    .stat-num span { color: var(--orange); }
+    .stat-label { font-size: 14px; color: var(--mid); margin-top: 8px; font-weight: 500; }
+
+    /* ── SECTIONS ── */
+    .section { padding: 80px 0; }
+    .section-white { background: var(--white); }
+    .section-gray  { background: var(--bg); }
+
+    .sec-head { margin-bottom: 48px; }
+    .sec-eyebrow { margin-bottom: 10px; }
+    .sec-title {
+      font-size: clamp(24px, 3.5vw, 40px); font-weight: 800;
+      letter-spacing: -.4px; line-height: 1.15; margin-bottom: 14px;
+    }
+    .sec-title .accent { color: var(--orange); }
+    .sec-sub { font-size: 16px; color: var(--mid); max-width: 560px; line-height: 1.65; }
+
+    /* ── SOLUTIONS ── */
+    .solutions-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .sol-card {
+      border-radius: 16px; overflow: hidden; position: relative;
+      background: var(--dark); min-height: 340px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 32px; cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .sol-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.2); }
+    .sol-card-bg {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 80px; opacity: .12;
+    }
+    .sol-card-label { margin-bottom: 8px; position: relative; }
+    .sol-card-title {
+      font-size: 22px; font-weight: 800; color: #fff; position: relative;
+      margin-bottom: 10px; line-height: 1.2;
+    }
+    .sol-card-sub { font-size: 14px; color: rgba(255,255,255,.6); position: relative; margin-bottom: 20px; }
+    .sol-card-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 14px; font-weight: 700; color: var(--yellow);
+      text-decoration: none; position: relative;
+      transition: gap .15s;
+    }
+    .sol-card-link:hover { gap: 12px; }
+    .sol-card--home   { background: linear-gradient(160deg, #1a3a5c, #0f2238); }
+    .sol-card--biz    { background: linear-gradient(160deg, #1a2c1a, #0e1f0e); }
+    .sol-card--equip  { background: linear-gradient(160deg, #2c1a0e, #1f100a); }
+
+    /* ── CLIENTS ── */
+    #clients { overflow: hidden; }
+    .clients-track-wrap { overflow: hidden; margin-top: 36px; }
+    .clients-track {
+      display: flex; gap: 32px; align-items: center;
+      animation: scroll-left 25s linear infinite;
+      width: max-content;
+    }
+    @keyframes scroll-left {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .client-logo {
+      height: 44px; padding: 10px 24px; background: var(--white);
+      border: 1px solid var(--border); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; color: var(--mid);
+      white-space: nowrap; flex-shrink: 0;
+    }
+
+    /* ── PROJECTS ── */
+    .tabs { display: flex; gap: 8px; margin-bottom: 32px; }
+    .tab-btn {
+      padding: 9px 22px; border-radius: 999px; border: 1.5px solid var(--border);
+      background: var(--white); font-size: 14px; font-weight: 600; color: var(--mid);
+      cursor: pointer; transition: all .15s; font-family: 'Inter', sans-serif;
+    }
+    .tab-btn.active { background: var(--orange); border-color: var(--orange); color: #fff; }
+    .tab-btn:hover:not(.active) { border-color: var(--orange); color: var(--orange); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;
+    }
+    .proj-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .proj-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.1); transform: translateY(-3px); }
+    .proj-img {
+      height: 180px; background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 48px; position: relative; overflow: hidden;
+    }
+    .proj-img-label {
+      position: absolute; top: 12px; left: 12px;
+    }
+    .proj-body { padding: 18px; }
+    .proj-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .proj-region { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+    .proj-saving {
+      display: flex; align-items: baseline; gap: 6px;
+    }
+    .proj-saving-label { font-size: 12px; color: var(--mid); }
+    .proj-saving-val {
+      font-size: 17px; font-weight: 800; color: var(--orange);
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── PRODUCTS ── */
+    .products-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px;
+    }
+    .prod-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+      transition: box-shadow .2s, transform .2s; position: relative;
+    }
+    .prod-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.1); transform: translateY(-2px); }
+    .prod-img {
+      height: 160px; background: var(--bg);
+      display: flex; align-items: center; justify-content: center; font-size: 52px;
+    }
+    .prod-body { padding: 14px; }
+    .prod-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+    .prod-price {
+      font-size: 18px; font-weight: 800; color: var(--dark);
+      font-family: 'DM Mono', monospace; margin-bottom: 10px;
+    }
+    .prod-price span { font-size: 12px; font-weight: 500; color: var(--muted); }
+    .prod-buy {
+      width: 100%; padding: 9px; font-size: 13px; font-weight: 700;
+      background: var(--orange); color: #fff; border: none; border-radius: 8px;
+      cursor: pointer; font-family: 'Inter', sans-serif;
+      transition: background .15s;
+    }
+    .prod-buy:hover { background: var(--orange2); }
+    .prod-stock {
+      position: absolute; top: 10px; right: 10px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+      padding: 3px 8px; border-radius: 999px;
+    }
+    .prod-stock.in { background: var(--green-lt); color: var(--green); }
+
+    /* ── CALCULATOR ── */
+    #calc { background: linear-gradient(135deg, #0f172a, #1e3a5f); }
+    .calc-wrap {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .calc-left .sec-title { color: #fff; }
+    .calc-left .sec-sub { color: rgba(255,255,255,.6); }
+    .calc-card {
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 20px; padding: 32px; backdrop-filter: blur(10px);
+    }
+    .calc-row { margin-bottom: 20px; }
+    .calc-label {
+      font-size: 13px; font-weight: 600; color: rgba(255,255,255,.6);
+      margin-bottom: 8px; display: block;
+    }
+    .calc-input {
+      width: 100%; padding: 12px 16px; background: rgba(255,255,255,.08);
+      border: 1.5px solid rgba(255,255,255,.15); border-radius: 10px;
+      color: #fff; font-family: 'Inter', sans-serif; font-size: 15px; outline: none;
+    }
+    .calc-input:focus { border-color: var(--orange); }
+    .calc-input option { background: #1e3a5f; }
+    .calc-result {
+      background: rgba(249,115,22,.15); border: 1px solid rgba(249,115,22,.3);
+      border-radius: 12px; padding: 20px; margin-top: 20px;
+    }
+    .calc-result-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .calc-result-row:last-child { margin-bottom: 0; }
+    .calc-result-label { font-size: 13px; color: rgba(255,255,255,.6); }
+    .calc-result-val {
+      font-size: 18px; font-weight: 800; color: var(--yellow);
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── CTA BANNER ── */
+    #cta-banner {
+      background: linear-gradient(135deg, var(--orange), var(--yellow2));
+      padding: 70px 0; text-align: center;
+    }
+    #cta-banner h2 {
+      font-size: clamp(26px, 4vw, 44px); font-weight: 900;
+      color: #fff; margin-bottom: 16px; letter-spacing: -.3px;
+    }
+    #cta-banner p { font-size: 17px; color: rgba(255,255,255,.85); margin-bottom: 36px; }
+    #cta-banner .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── REVIEWS ── */
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;
+    }
+    .review-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 14px; padding: 24px;
+    }
+    .review-stars { font-size: 16px; margin-bottom: 12px; }
+    .review-text { font-size: 14px; color: var(--mid); line-height: 1.65; margin-bottom: 16px; }
+    .review-author { display: flex; align-items: center; gap: 12px; }
+    .review-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--orange), var(--yellow));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 700; color: #fff; flex-shrink: 0;
+    }
+    .review-name { font-size: 14px; font-weight: 700; }
+    .review-meta { font-size: 12px; color: var(--muted); }
+
+    /* ── PROCESS ── */
+    .process-steps {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;
+    }
+    .step-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 14px; padding: 28px; position: relative;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .step-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.08); transform: translateY(-2px); }
+    .step-num {
+      font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 600;
+      color: var(--orange); margin-bottom: 12px;
+    }
+    .step-icon { font-size: 28px; margin-bottom: 12px; }
+    .step-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .step-desc { font-size: 13px; color: var(--mid); line-height: 1.6; }
+
+    /* ── WHY US ── */
+    .why-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+    }
+    .why-list { display: flex; flex-direction: column; gap: 16px; }
+    .why-item {
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+    .why-icon {
+      width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+      background: var(--ora-lt); display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .why-text-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .why-text-desc { font-size: 13px; color: var(--mid); line-height: 1.55; }
+    .why-visual {
+      background: linear-gradient(135deg, #1a2744, #1e3a5f);
+      border-radius: 20px; padding: 40px; color: #fff;
+    }
+    .why-visual-title { font-size: 18px; font-weight: 700; margin-bottom: 24px; }
+    .why-visual-items { display: flex; flex-direction: column; gap: 16px; }
+    .why-visual-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px; background: rgba(255,255,255,.07);
+      border-radius: 10px; border: 1px solid rgba(255,255,255,.1);
+    }
+    .why-visual-item-label { font-size: 13px; color: rgba(255,255,255,.65); }
+    .why-visual-item-val {
+      font-size: 18px; font-weight: 800; color: var(--yellow);
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── BRANDS ── */
+    .brands-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 14px;
+    }
+    .brand-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 10px; padding: 20px 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; color: var(--mid); min-height: 72px;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .brand-card:hover { border-color: var(--orange); box-shadow: 0 4px 16px rgba(249,115,22,.1); }
+
+    /* ── FAQ ── */
+    .faq-list { display: flex; flex-direction: column; gap: 10px; max-width: 720px; }
+    .faq-item {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+    }
+    .faq-q {
+      width: 100%; display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 20px; font-size: 15px; font-weight: 600;
+      cursor: pointer; border: none; background: none; font-family: 'Inter', sans-serif;
+      text-align: left; gap: 12px;
+    }
+    .faq-q:hover { background: var(--ora-lt); }
+    .faq-icon { font-size: 18px; flex-shrink: 0; transition: transform .2s; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      padding: 0 20px; max-height: 0; overflow: hidden;
+      transition: max-height .3s, padding .3s; font-size: 14px; color: var(--mid); line-height: 1.7;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding: 0 20px 18px; }
+
+    /* ── CONTACTS ── */
+    .contacts-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;
+    }
+    .contact-block { display: flex; flex-direction: column; gap: 20px; }
+    .contact-item { display: flex; gap: 14px; align-items: flex-start; }
+    .contact-icon {
+      width: 44px; height: 44px; background: var(--ora-lt);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .contact-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
+    .contact-val { font-size: 16px; font-weight: 700; }
+    .contact-val a { color: var(--dark); text-decoration: none; }
+    .contact-val a:hover { color: var(--orange); }
+
+    /* Lead Form */
+    .lead-form {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 20px; padding: 36px;
+    }
+    .lead-form h3 { font-size: 20px; font-weight: 800; margin-bottom: 24px; }
+    .form-group { margin-bottom: 16px; }
+    .form-label { display: block; font-size: 13px; font-weight: 600; color: var(--mid); margin-bottom: 6px; }
+    .form-input {
+      width: 100%; padding: 12px 16px; border: 1.5px solid var(--border);
+      border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 15px;
+      color: var(--text); outline: none; transition: border-color .15s, box-shadow .15s;
+      background: var(--bg);
+    }
+    .form-input:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(249,115,22,.1); background: var(--white); }
+    .form-select { appearance: none; cursor: pointer; }
+    .contact-method { display: flex; gap: 8px; }
+    .cm-btn {
+      flex: 1; padding: 9px; border: 1.5px solid var(--border);
+      border-radius: 8px; background: var(--bg);
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: all .15s; color: var(--mid);
+    }
+    .cm-btn.active, .cm-btn:hover { border-color: var(--orange); background: var(--ora-lt); color: var(--orange2); }
+    .form-submit {
+      width: 100%; padding: 14px; margin-top: 8px;
+      background: var(--orange); color: #fff; border: none; border-radius: 999px;
+      font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700;
+      cursor: pointer; transition: background .15s, transform .15s;
+    }
+    .form-submit:hover { background: var(--orange2); transform: translateY(-1px); }
+    .form-note { font-size: 12px; color: var(--muted); margin-top: 10px; text-align: center; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark); color: rgba(255,255,255,.65);
+      padding: 60px 0 0;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 220px repeat(4, 1fr); gap: 40px; padding-bottom: 48px;
+    }
+    .footer-brand { }
+    .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .footer-logo .logo-text { color: #fff; font-size: 18px; }
+    .footer-brand-desc { font-size: 13px; line-height: 1.7; margin-bottom: 20px; }
+    .footer-social { display: flex; gap: 10px; }
+    .social-btn {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; text-decoration: none;
+      transition: background .15s, border-color .15s;
+    }
+    .social-btn:hover { background: var(--orange); border-color: var(--orange); }
+
+    .footer-col-title {
+      font-size: 13px; font-weight: 700; color: #fff; text-transform: uppercase;
+      letter-spacing: .07em; margin-bottom: 16px;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 9px; }
+    .footer-links a {
+      font-size: 13px; color: rgba(255,255,255,.55); text-decoration: none;
+      transition: color .12s;
+    }
+    .footer-links a:hover { color: var(--yellow); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 20px 0; display: flex; align-items: center;
+      justify-content: space-between; gap: 16px; flex-wrap: wrap;
+      font-size: 13px;
+    }
+    .footer-bottom a { color: rgba(255,255,255,.45); text-decoration: none; }
+    .footer-bottom a:hover { color: rgba(255,255,255,.85); }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,.6); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--white); border-radius: 20px; padding: 40px;
+      max-width: 460px; width: 100%; position: relative;
+      animation: modal-in .25s ease;
+    }
+    @keyframes modal-in { from { transform: scale(.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      width: 32px; height: 32px; border-radius: 8px;
+      background: var(--bg); border: none; cursor: pointer;
+      font-size: 16px; display: flex; align-items: center; justify-content: center;
+    }
+    .modal-close:hover { background: var(--border); }
+    .modal h3 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+    .modal-sub { font-size: 14px; color: var(--mid); margin-bottom: 24px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-card { display: none; }
+      .solutions-grid { grid-template-columns: 1fr; }
+      .calc-wrap, .why-grid, .contacts-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      nav { display: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-inner">
+      <span>📍 [МІСТО] <span class="sep">·</span> Працюємо щодня [ГОДИНИ РОБОТИ]</span>
+      <span>
+        <a href="mailto:[EMAIL]">[EMAIL]</a>
+        <span class="sep">·</span>
+        <a href="https://t.me/[TELEGRAM]">Telegram</a>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="container">
+    <div class="header-inner">
+      <a href="#" class="logo">
+        <div class="logo-mark">☀️</div>
+        <div class="logo-text">[НАЗВА]<span>Solar</span></div>
+      </a>
+
+      <nav>
+        <ul class="nav-list">
+          <li class="has-drop">
+            <a href="#">Електростанції ▾</a>
+            <div class="dropdown">
+              <a href="#">Для дому</a>
+              <a href="#">Для бізнесу</a>
+              <a href="#">Автономні</a>
+              <a href="#">Гібридні</a>
+              <a href="#">Мережеві</a>
+            </div>
+          </li>
+          <li><a href="#calc">Калькулятор</a></li>
+          <li class="has-drop">
+            <a href="#">Послуги ▾</a>
+            <div class="dropdown">
+              <a href="#">Монтаж та підключення</a>
+              <a href="#">Проєктування</a>
+              <a href="#">Обслуговування</a>
+              <a href="#">Кредитування 0%</a>
+            </div>
+          </li>
+          <li><a href="#projects">Проєкти</a></li>
+          <li><a href="#reviews">Відгуки</a></li>
+          <li><a href="#contacts">Контакти</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-cta">
+        <a href="tel:[ТЕЛЕФОН]" class="header-phone">[ТЕЛЕФОН]</a>
+        <button class="btn btn-orange" onclick="openModal()">Залишити заявку</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-tag">
+          <span class="tag tag-dark">☀️ [МІСТО] та область</span>
+        </div>
+        <h1 class="hero-title">
+          Будуємо<br/><span class="accent">енергонезалежність</span><br/>для вас
+        </h1>
+        <p class="hero-sub">
+          [НАЗВА КОМПАНІЇ] — встановлення сонячних електростанцій під ключ для дому та бізнесу. Гарантія [ГАРАНТІЯ] років, безкоштовний виїзд спеціаліста.
+        </p>
+        <div class="hero-cta">
+          <button class="btn btn-yellow" onclick="openModal()">Отримати розрахунок</button>
+          <a href="#projects" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1.5px solid rgba(255,255,255,.2);">Наші проєкти →</a>
+        </div>
+        <div class="hero-chips">
+          <div class="hero-chip">
+            <div class="hero-chip-val">[КІЛЬКІСТЬ]+</div>
+            <div class="hero-chip-label">встановлених СЕС</div>
+          </div>
+          <div class="hero-chip">
+            <div class="hero-chip-val">[МВт] МВт</div>
+            <div class="hero-chip-label">загальна потужність</div>
+          </div>
+          <div class="hero-chip">
+            <div class="hero-chip-val">[РОКИ]+</div>
+            <div class="hero-chip-label">років досвіду</div>
+          </div>
+          <div class="hero-chip">
+            <div class="hero-chip-val">[ГАРАНТІЯ] р.</div>
+            <div class="hero-chip-label">гарантія роботи</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-title">Розрахувати систему</div>
+        <div class="hero-type-btns">
+          <button class="hero-type-btn active" onclick="switchHeroType(this,'home')">🏠 Дім</button>
+          <button class="hero-type-btn" onclick="switchHeroType(this,'biz')">🏢 Бізнес</button>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-label">Середня потужність системи</div>
+          <div class="hero-stat-val" id="hs-power"><span>10</span> кВт</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-label">Економія на рік</div>
+          <div class="hero-stat-val" id="hs-save"><span>60,000</span> грн</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-label">Окупність</div>
+          <div class="hero-stat-val" id="hs-roi"><span>3–4</span> роки</div>
+        </div>
+        <button class="btn btn-orange hero-card-btn" onclick="openModal()">
+          Залишити заявку →
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-num">[КІЛЬКІСТЬ]<span>+</span></div>
+        <div class="stat-label">завершених проєктів</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">[МВт]<span> МВт</span></div>
+        <div class="stat-label">встановленої потужності</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">[РОКИ]<span>+</span></div>
+        <div class="stat-label">років на ринку</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">[ГАРАНТІЯ]<span> р.</span></div>
+        <div class="stat-label">гарантія на монтаж</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTIONS -->
+<section class="section section-white">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-eyebrow"><span class="tag tag-orange">Рішення</span></div>
+      <h2 class="sec-title">Що ми <span class="accent">пропонуємо</span></h2>
+      <p class="sec-sub">Повний спектр рішень для переходу на сонячну енергетику — від розробки проєкту до запуску та обслуговування.</p>
+    </div>
+    <div class="solutions-grid">
+      <div class="sol-card sol-card--home">
+        <div class="sol-card-bg">🏠</div>
+        <div class="sol-card-label"><span class="tag tag-yellow">5–30 кВт</span></div>
+        <div class="sol-card-title">Рішення для дому</div>
+        <div class="sol-card-sub">Сонячна станція для приватного будинку. Рахунки за електрику —70–90%.</div>
+        <a href="#" class="sol-card-link">Дізнатись більше →</a>
+      </div>
+      <div class="sol-card sol-card--biz">
+        <div class="sol-card-bg">🏢</div>
+        <div class="sol-card-label"><span class="tag tag-orange">50–1000 кВт</span></div>
+        <div class="sol-card-title">Рішення для бізнесу</div>
+        <div class="sol-card-sub">Великі промислові станції. Продаж надлишку в мережу за зеленим тарифом.</div>
+        <a href="#" class="sol-card-link">Дізнатись більше →</a>
+      </div>
+      <div class="sol-card sol-card--equip">
+        <div class="sol-card-bg">⚡</div>
+        <div class="sol-card-label"><span class="tag tag-dark">Офіційний постачальник</span></div>
+        <div class="sol-card-title">Обладнання</div>
+        <div class="sol-card-sub">Інвертори, акумулятори, сонячні панелі провідних брендів з гарантією.</div>
+        <a href="#" class="sol-card-link">До каталогу →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section section-gray">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-eyebrow"><span class="tag tag-orange">Як це працює</span></div>
+      <h2 class="sec-title">Шлях до <span class="accent">вашої СЕС</span></h2>
+      <p class="sec-sub">Від першого дзвінка до готової станції — чіткий і прозорий процес.</p>
+    </div>
+    <div class="process-steps">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <div class="step-icon">📋</div>
+        <div class="step-title">Заявка</div>
+        <div class="step-desc">Залишаєте заявку — ми зв'язуємося протягом [ТЕРМІН] хвилин.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <div class="step-icon">🔍</div>
+        <div class="step-title">Безкоштовний виїзд</div>
+        <div class="step-desc">Спеціаліст оглядає об'єкт, аналізує споживання та готує проєкт.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <div class="step-icon">📐</div>
+        <div class="step-title">Проєктування</div>
+        <div class="step-desc">Розробляємо індивідуальний проєкт з розрахунком окупності.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <div class="step-icon">🔧</div>
+        <div class="step-title">Монтаж</div>
+        <div class="step-desc">Встановлюємо обладнання. Термін монтажу — [ТЕРМІН МОНТАЖУ] дні.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">05</div>
+        <div class="step-icon">⚡</div>
+        <div class="step-title">Підключення</div>
+        <div class="step-desc">Підключення до мережі та отримання дозволів у [ОБЛЕНЕРГО].</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">06</div>
+        <div class="step-icon">✅</div>
+        <div class="step-title">Здача та гарантія</div>
+        <div class="step-desc">Передаємо готову станцію. Гарантія [ГАРАНТІЯ] років на роботи.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section section-white">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-eyebrow"><span class="tag tag-orange">Портфоліо</span></div>
+      <h2 class="sec-title">Наші <span class="accent">проєкти</span></h2>
+      <p class="sec-sub">Реальні об'єкти в [РЕГІОН]. Результати — в цифрах.</p>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('proj','home',this)">🏠 Для дому</button>
+      <button class="tab-btn" onclick="switchTab('proj','biz',this)">🏢 Для бізнесу</button>
+    </div>
+
+    <div id="proj-home" class="tab-panel active">
+      <div class="projects-grid">
+        <div class="proj-card">
+          <div class="proj-img">🏠
+            <div class="proj-img-label"><span class="tag tag-yellow">10 кВт</span></div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-title">Мережева станція 10 кВт</div>
+            <div class="proj-region">📍 [МІСТО], [РАЙОН]</div>
+            <div class="proj-saving">
+              <span class="proj-saving-label">Економія/рік:</span>
+              <span class="proj-saving-val">[СУМА] ₴</span>
+            </div>
+          </div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-img">🏡
+            <div class="proj-img-label"><span class="tag tag-yellow">15 кВт</span></div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-title">Гібридна станція 15 кВт</div>
+            <div class="proj-region">📍 [МІСТО], [РАЙОН]</div>
+            <div class="proj-saving">
+              <span class="proj-saving-label">Економія/рік:</span>
+              <span class="proj-saving-val">[СУМА] ₴</span>
+            </div>
+          </div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-img">🌿
+            <div class="proj-img-label"><span class="tag tag-green">20 кВт</span></div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-title">Автономна станція 20 кВт</div>
+            <div class="proj-region">📍 [МІСТО], [РАЙОН]</div>
+            <div class="proj-saving">
+              <span class="proj-saving-label">Економія/рік:</span>
+              <span class="proj-saving-val">[СУМА] ₴</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="proj-biz" class="tab-panel">
+      <div class="projects-grid">
+        <div class="proj-card">
+          <div class="proj-img">🏭
+            <div class="proj-img-label"><span class="tag tag-orange">100 кВт</span></div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-title">Мережева станція 100 кВт</div>
+            <div class="proj-region">📍 [МІСТО], [РАЙОН]</div>
+            <div class="proj-saving">
+              <span class="proj-saving-label">Економія/рік:</span>
+              <span class="proj-saving-val">[СУМА] ₴</span>
+            </div>
+          </div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-img">🏗️
+            <div class="proj-img-label"><span class="tag tag-orange">250 кВт</span></div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-title">Промислова СЕС 250 кВт</div>
+            <div class="proj-region">📍 [МІСТО], [РАЙОН]</div>
+            <div class="proj-saving">
+              <span class="proj-saving-label">Економія/рік:</span>
+              <span class="proj-saving-val">[СУМА] ₴</span>
+            </div>
+          </div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-img">⚙️
+            <div class="proj-img-label"><span class="tag tag-orange">500 кВт</span></div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-title">Мережева СЕС 500 кВт</div>
+            <div class="proj-region">📍 [МІСТО], [РАЙОН]</div>
+            <div class="proj-saving">
+              <span class="proj-saving-label">Економія/рік:</span>
+              <span class="proj-saving-val">[СУМА] ₴</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:32px;text-align:center;">
+      <a href="#" class="btn btn-outline">Всі проєкти →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section id="calc" class="section">
+  <div class="container">
+    <div class="calc-wrap">
+      <div class="calc-left">
+        <div class="sec-eyebrow"><span class="tag tag-orange">Безкоштовно</span></div>
+        <h2 class="sec-title" style="color:#fff;">Розрахуйте свою <span style="color:var(--yellow);">СЕС</span></h2>
+        <p class="sec-sub" style="color:rgba(255,255,255,.6);">
+          Вкажіть параметри об'єкту — отримайте орієнтовний розрахунок потужності, вартості та термінів окупності.
+        </p>
+        <div style="margin-top:28px;display:flex;flex-direction:column;gap:14px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:18px;">✅</span>
+            <span style="font-size:14px;color:rgba(255,255,255,.7);">Безкоштовний розрахунок</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:18px;">✅</span>
+            <span style="font-size:14px;color:rgba(255,255,255,.7);">Безкоштовний виїзд спеціаліста</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:18px;">✅</span>
+            <span style="font-size:14px;color:rgba(255,255,255,.7);">Кредит 0% від [БАНК]</span>
+          </div>
+        </div>
+      </div>
+      <div class="calc-card">
+        <div class="calc-row">
+          <label class="calc-label">Тип об'єкту</label>
+          <select class="calc-input form-select" id="c-type" onchange="calcUpdate()">
+            <option value="home">Приватний будинок</option>
+            <option value="biz">Бізнес / Промисловість</option>
+          </select>
+        </div>
+        <div class="calc-row">
+          <label class="calc-label">Щомісячне споживання (кВт·год)</label>
+          <input type="number" class="calc-input" id="c-kwh" placeholder="500" value="500" oninput="calcUpdate()" />
+        </div>
+        <div class="calc-row">
+          <label class="calc-label">Площа даху (м²)</label>
+          <input type="number" class="calc-input" id="c-roof" placeholder="50" value="50" oninput="calcUpdate()" />
+        </div>
+        <div class="calc-result">
+          <div class="calc-result-row">
+            <span class="calc-result-label">Рекомендована потужність</span>
+            <span class="calc-result-val" id="r-power">10 кВт</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Орієнтовна вартість</span>
+            <span class="calc-result-val" id="r-cost">від 350,000 ₴</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Економія на рік</span>
+            <span class="calc-result-val" id="r-save">~60,000 ₴</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Окупність</span>
+            <span class="calc-result-val" id="r-roi">3–4 роки</span>
+          </div>
+        </div>
+        <button class="btn btn-orange" style="width:100%;justify-content:center;margin-top:16px;" onclick="openModal()">
+          Отримати точний розрахунок
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section section-white">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-eyebrow"><span class="tag tag-orange">Чому обирають нас</span></div>
+      <h2 class="sec-title">Наші <span class="accent">переваги</span></h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-list">
+        <div class="why-item">
+          <div class="why-icon">🔧</div>
+          <div>
+            <div class="why-text-title">Монтаж під ключ</div>
+            <div class="why-text-desc">Від проєктування до підключення до мережі — всі роботи виконуємо самостійно.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🛡️</div>
+          <div>
+            <div class="why-text-title">Гарантія [ГАРАНТІЯ] років</div>
+            <div class="why-text-desc">Офіційна гарантія на всі роботи та обладнання. Безкоштовне обслуговування.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">💳</div>
+          <div>
+            <div class="why-text-title">Кредит 0% від [БАНК]</div>
+            <div class="why-text-desc">Встановіть зараз, платіть частинами. Сума [СУМА_МІН]–[СУМА_МАКС] грн, до [СТРОК] місяців.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">📍</div>
+          <div>
+            <div class="why-text-title">Місцева команда</div>
+            <div class="why-text-desc">Базуємось у [МІСТО]. Виїзд на об'єкт — безкоштовно і в день звернення.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🏆</div>
+          <div>
+            <div class="why-text-title">Офіційний дилер</div>
+            <div class="why-text-desc">Сертифікований партнер [БРЕНДИ]. Обладнання напряму від виробника.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">⚡</div>
+          <div>
+            <div class="why-text-title">Швидкий монтаж</div>
+            <div class="why-text-desc">Стандартний об'єкт — [ТЕРМІН_МОНТАЖУ] дні. Не зупиняємо вашу роботу.</div>
+          </div>
+        </div>
+      </div>
+      <div class="why-visual">
+        <div class="why-visual-title">📊 Середній проєкт для дому</div>
+        <div class="why-visual-items">
+          <div class="why-visual-item">
+            <div class="why-visual-item-label">Потужність системи</div>
+            <div class="why-visual-item-val">[ПОТУЖНІСТЬ] кВт</div>
+          </div>
+          <div class="why-visual-item">
+            <div class="why-visual-item-label">Вартість "під ключ"</div>
+            <div class="why-visual-item-val">від [ВАРТІСТЬ] грн</div>
+          </div>
+          <div class="why-visual-item">
+            <div class="why-visual-item-label">Економія на рік</div>
+            <div class="why-visual-item-val">[ЕКОНОМІЯ] грн</div>
+          </div>
+          <div class="why-visual-item">
+            <div class="why-visual-item-label">Окупність</div>
+            <div class="why-visual-item-val">[ОКУПНІСТЬ] роки</div>
+          </div>
+          <div class="why-visual-item">
+            <div class="why-visual-item-label">Термін монтажу</div>
+            <div class="why-visual-item-val">[ТЕРМІН_МОНТАЖУ] дні</div>
+          </div>
+        </div>
+        <button class="btn btn-yellow" style="width:100%;justify-content:center;margin-top:20px;" onclick="openModal()">
+          Розрахувати для мого об'єкту
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section section-gray">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-eyebrow"><span class="tag tag-orange">Каталог</span></div>
+      <h2 class="sec-title">Популярні <span class="accent">товари</span></h2>
+      <p class="sec-sub">Офіційне обладнання провідних брендів з гарантією виробника.</p>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('prod','inv',this)">Інвертори</button>
+      <button class="tab-btn" onclick="switchTab('prod','bat',this)">Акумулятори</button>
+      <button class="tab-btn" onclick="switchTab('prod','pan',this)">Панелі</button>
+      <button class="tab-btn" onclick="switchTab('prod','kit',this)">Комплекти</button>
+    </div>
+
+    <div id="prod-inv" class="tab-panel active">
+      <div class="products-grid">
+        <div class="prod-card">
+          <div class="prod-img">⚡</div>
+          <span class="prod-stock in">В наявності</span>
+          <div class="prod-body">
+            <div class="prod-name">[БРЕНД] Гібридний інвертор [X] кВт</div>
+            <div class="prod-price">[ЦІНА] <span>₴</span></div>
+            <button class="prod-buy" onclick="openModal()">Купити</button>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img">🔋</div>
+          <span class="prod-stock in">В наявності</span>
+          <div class="prod-body">
+            <div class="prod-name">[БРЕНД] Інвертор мережевий [X] кВт</div>
+            <div class="prod-price">[ЦІНА] <span>₴</span></div>
+            <button class="prod-buy" onclick="openModal()">Купити</button>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img">⚡</div>
+          <span class="prod-stock in">В наявності</span>
+          <div class="prod-body">
+            <div class="prod-name">[БРЕНД] Інвертор автономний [X] кВт</div>
+            <div class="prod-price">[ЦІНА] <span>₴</span></div>
+            <button class="prod-buy" onclick="openModal()">Купити</button>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img">🔌</div>
+          <span class="prod-stock in">В наявності</span>
+          <div class="prod-body">
+            <div class="prod-name">[БРЕНД] Інвертор [X] кВт однофазний</div>
+            <div class="prod-price">[ЦІНА] <span>₴</span></div>
+            <button class="prod-buy" onclick="openModal()">Купити</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="prod-bat" class="tab-panel">
+      <div class="products-grid">
+        <div class="prod-card">
+          <div class="prod-img">🔋</div>
+          <span class="prod-stock in">В наявності</span>
+          <div class="prod-body">
+            <div class="prod-name">[БРЕНД] Акумулятор LiFePO4 [X] кВт·год</div>
+            <div class="prod-price">[ЦІНА] <span>₴</span></div>
+            <button class="prod-buy" onclick="openModal()">Купити</button>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img">⚡</div>
+          <span class="prod-stock in">В наявності</span>
+          <div class="prod-body">
+            <div class="prod-name">[БРЕНД] Батарейний блок [X] кВт·год</div>
+            <div class="prod-price">[ЦІНА] <span>₴</span></div>
+            <button class="prod-buy" onclick="openModal()">Купити</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="prod-pan" class="tab-panel">
+      <div class="products-grid">
+        <div class="prod-card">
+          <div class="prod-img">☀️</div>
+          <span class="prod-stock in">В наявності</span>
+          <div class="prod-body">
+            <div class="prod-name">[БРЕНД] Сонячна панель [X] Вт Mono</div>
+            <div class="prod-price">[ЦІНА] <span>₴</span></div>
+            <button class="prod-buy" onclick="openModal()">Купити</button>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="prod-img">🌞</div>
+          <span class="prod-stock in">В наявності</span>
+          <div class="prod-body">
+            <div class="prod-name">[БРЕНД] Панель двостороння [X] Вт</div>
+            <div class="prod-price">[ЦІНА] <span>₴</span></div>
+            <button class="prod-buy" onclick="openModal()">Купити</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="prod-kit" class="tab-panel">
+      <div class="products-grid">
+        <div class="prod-card">
+          <div class="prod-img">📦</div>
+          <span class="prod-stock in">В наявності</span>
+          <div class="prod-body">
+            <div class="prod-name">Комплект резервного живлення [X] кВт·год</div>
+            <div class="prod-price">[ЦІНА] <span>₴</span></div>
+            <button class="prod-buy" onclick="openModal()">Купити</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:32px;text-align:center;">
+      <a href="#" class="btn btn-outline">Весь каталог →</a>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<section class="section section-white">
+  <div class="container">
+    <div class="sec-head" style="text-align:center;">
+      <div class="sec-eyebrow" style="justify-content:center;display:flex;"><span class="tag tag-orange">Офіційний дилер</span></div>
+      <h2 class="sec-title">Бренди <span class="accent">обладнання</span></h2>
+      <p class="sec-sub" style="margin:0 auto;">Працюємо тільки з перевіреними виробниками.</p>
+    </div>
+    <div class="brands-grid">
+      <div class="brand-card">[БРЕНД 1]</div>
+      <div class="brand-card">[БРЕНД 2]</div>
+      <div class="brand-card">[БРЕНД 3]</div>
+      <div class="brand-card">[БРЕНД 4]</div>
+      <div class="brand-card">[БРЕНД 5]</div>
+      <div class="brand-card">[БРЕНД 6]</div>
+      <div class="brand-card">[БРЕНД 7]</div>
+      <div class="brand-card">[БРЕНД 8]</div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section id="clients" class="section section-gray">
+  <div class="container">
+    <div class="sec-head" style="text-align:center;">
+      <div class="sec-eyebrow" style="justify-content:center;display:flex;"><span class="tag tag-orange">Корпоративні клієнти</span></div>
+      <h2 class="sec-title">Нам <span class="accent">довіряють</span></h2>
+      <p class="sec-sub" style="margin:0 auto;">[КІЛЬКІСТЬ_КЛІЄНТІВ]+ корпоративних клієнтів по всій Україні.</p>
+    </div>
+  </div>
+  <div class="clients-track-wrap">
+    <div class="clients-track" id="clients-track">
+      <div class="client-logo">[Клієнт 1]</div>
+      <div class="client-logo">[Клієнт 2]</div>
+      <div class="client-logo">[Клієнт 3]</div>
+      <div class="client-logo">[Клієнт 4]</div>
+      <div class="client-logo">[Клієнт 5]</div>
+      <div class="client-logo">[Клієнт 6]</div>
+      <div class="client-logo">[Клієнт 7]</div>
+      <div class="client-logo">[Клієнт 8]</div>
+      <div class="client-logo">[Клієнт 9]</div>
+      <div class="client-logo">[Клієнт 10]</div>
+      <!-- дублюємо для нескінченного скролу -->
+      <div class="client-logo">[Клієнт 1]</div>
+      <div class="client-logo">[Клієнт 2]</div>
+      <div class="client-logo">[Клієнт 3]</div>
+      <div class="client-logo">[Клієнт 4]</div>
+      <div class="client-logo">[Клієнт 5]</div>
+      <div class="client-logo">[Клієнт 6]</div>
+      <div class="client-logo">[Клієнт 7]</div>
+      <div class="client-logo">[Клієнт 8]</div>
+      <div class="client-logo">[Клієнт 9]</div>
+      <div class="client-logo">[Клієнт 10]</div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="section section-white">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-eyebrow"><span class="tag tag-orange">Відгуки</span></div>
+      <h2 class="sec-title">Що кажуть <span class="accent">клієнти</span></h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <div class="review-text">[ТЕКСТ ВІДГУКУ. Опис досвіду роботи з компанією, результати, враження від монтажу та якості обладнання. Мінімум 2-3 речення для достовірності.]</div>
+        <div class="review-author">
+          <div class="review-avatar">[І]</div>
+          <div>
+            <div class="review-name">[Ім'я Прізвище]</div>
+            <div class="review-meta">[МІСТО] · [ПОТУЖНІСТЬ] кВт · [МІС] [РІК]</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <div class="review-text">[ТЕКСТ ВІДГУКУ. Опис досвіду роботи з компанією, результати, враження від монтажу та якості обладнання. Мінімум 2-3 речення для достовірності.]</div>
+        <div class="review-author">
+          <div class="review-avatar">[І]</div>
+          <div>
+            <div class="review-name">[Ім'я Прізвище]</div>
+            <div class="review-meta">[МІСТО] · [ПОТУЖНІСТЬ] кВт · [МІС] [РІК]</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        <div class="review-text">[ТЕКСТ ВІДГУКУ. Опис досвіду роботи з компанією, результати, враження від монтажу та якості обладнання. Мінімум 2-3 речення для достовірності.]</div>
+        <div class="review-author">
+          <div class="review-avatar">[І]</div>
+          <div>
+            <div class="review-name">[Ім'я Прізвище]</div>
+            <div class="review-meta">[МІСТО] · [ПОТУЖНІСТЬ] кВт · [МІС] [РІК]</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section id="cta-banner">
+  <div class="container">
+    <h2>Готові до власного проєкту?</h2>
+    <p>Безкоштовний виїзд спеціаліста та розрахунок вашої СЕС — сьогодні.</p>
+    <div class="cta-row">
+      <button class="btn btn-white" onclick="openModal()">🚀 Залишити заявку!</button>
+      <a href="tel:[ТЕЛЕФОН]" class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.3);">📞 [ТЕЛЕФОН]</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section-white">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-eyebrow"><span class="tag tag-orange">Часті питання</span></div>
+      <h2 class="sec-title">Відповіді на <span class="accent">запитання</span></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>Скільки коштує встановлення сонячної станції?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Вартість залежить від потужності та типу системи. Орієнтовно: мережева станція 10 кВт "під ключ" — від [ВАРТІСТЬ_10КВТ] грн. Точну вартість розраховує спеціаліст після виїзду на об'єкт — безкоштовно.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>Чи є можливість купити в кредит або розстрочку?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Так. Кредит 0% від [БАНК] за програмою «[ПРОГРАМА]»: сума від [СУМА_МІН] до [СУМА_МАКС] грн, строк до [СТРОК] місяців. Без переплат.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>Скільки часу займає монтаж?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Стандартна система для дому (10–20 кВт) монтується за [ТЕРМІН_МОНТАЖУ] дні. Підключення до мережі та отримання дозволів — ще [ТЕРМІН_ПІДКЛЮЧЕННЯ] тижнів.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>Яка гарантія на обладнання та монтаж?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Гарантія на монтажні роботи — [ГАРАНТІЯ] років. Гарантія виробника на інвертори — до [ГАРАНТІЯ_ІНВЕРТОР] років, на сонячні панелі — до [ГАРАНТІЯ_ПАНЕЛІ] років.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>Чи можна продавати надлишки електроенергії?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Так, за системою Net Billing ви продаєте надлишки електроенергії в мережу. Ми допоможемо оформити всі документи та підключення до [ОБЛЕНЕРГО].</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>Чи потрібне технічне обслуговування?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">СЕС практично не потребує обслуговування. Рекомендуємо огляд 1 раз на рік. Перший рік — безкоштовно у складі гарантії.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTS -->
+<section id="contacts" class="section section-gray">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-eyebrow"><span class="tag tag-orange">Зв'яжіться з нами</span></div>
+      <h2 class="sec-title">Контакти <span class="accent">[НАЗВА КОМПАНІЇ]</span></h2>
+    </div>
+    <div class="contacts-grid">
+      <div class="contact-block">
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-label">Телефон</div>
+            <div class="contact-val"><a href="tel:[ТЕЛЕФОН]">[ТЕЛЕФОН]</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✈️</div>
+          <div>
+            <div class="contact-label">Telegram</div>
+            <div class="contact-val"><a href="https://t.me/[TELEGRAM]">@[TELEGRAM]</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-val"><a href="mailto:[EMAIL]">[EMAIL]</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Адреса</div>
+            <div class="contact-val">[АДРЕСА], [МІСТО]</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-label">Графік роботи</div>
+            <div class="contact-val">[ГОДИНИ РОБОТИ]</div>
+          </div>
+        </div>
+      </div>
+      <div class="lead-form">
+        <h3>Залишити заявку</h3>
+        <form onsubmit="submitLead(event)">
+          <div class="form-group">
+            <label class="form-label">Ваше ім'я</label>
+            <input type="text" class="form-input" placeholder="Іван Іваненко" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Телефон</label>
+            <input type="tel" class="form-input" id="c-phone" placeholder="+380XXXXXXXXX" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Тип об'єкту</label>
+            <select class="form-input form-select">
+              <option>Приватний будинок</option>
+              <option>Бізнес</option>
+              <option>Промислове підприємство</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Спосіб зв'язку</label>
+            <div class="contact-method">
+              <button type="button" class="cm-btn active" onclick="selectCm(this)">📞 Телефон</button>
+              <button type="button" class="cm-btn" onclick="selectCm(this)">💬 Viber</button>
+              <button type="button" class="cm-btn" onclick="selectCm(this)">✈️ Telegram</button>
+            </div>
+          </div>
+          <button type="submit" class="form-submit">Надіслати заявку →</button>
+          <div class="form-note">Натискаючи кнопку, ви погоджуєтесь з <a href="#">політикою конфіденційності</a></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="logo-mark" style="width:32px;height:32px;font-size:14px;">☀️</div>
+          <div class="logo-text">[НАЗВА]<span>Solar</span></div>
+        </div>
+        <div class="footer-brand-desc">
+          Встановлення сонячних електростанцій під ключ в [МІСТО] та [РЕГІОН]. Гарантія [ГАРАНТІЯ] років.
+        </div>
+        <div class="footer-social">
+          <a href="#" class="social-btn">f</a>
+          <a href="#" class="social-btn">in</a>
+          <a href="#" class="social-btn">▶</a>
+          <a href="#" class="social-btn">📷</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Рішення</div>
+        <div class="footer-links">
+          <a href="#">Для дому</a>
+          <a href="#">Для бізнесу</a>
+          <a href="#">Автономні СЕС</a>
+          <a href="#">Гібридні СЕС</a>
+          <a href="#">Мережеві СЕС</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Послуги</div>
+        <div class="footer-links">
+          <a href="#">Монтаж та підключення</a>
+          <a href="#">Проєктування</a>
+          <a href="#">Обслуговування</a>
+          <a href="#">Net Billing</a>
+          <a href="#">Кредитування 0%</a>
+          <a href="#">Страхування</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Магазин</div>
+        <div class="footer-links">
+          <a href="#">Інвертори</a>
+          <a href="#">Акумулятори</a>
+          <a href="#">Сонячні панелі</a>
+          <a href="#">Кріплення</a>
+          <a href="#">Комплекти</a>
+          <a href="#">Всі товари</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Компанія</div>
+        <div class="footer-links">
+          <a href="#">Про нас</a>
+          <a href="#">Проєкти</a>
+          <a href="#">Відгуки</a>
+          <a href="#">Блог</a>
+          <a href="#">Кар'єра</a>
+          <a href="#contacts">Контакти</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© [РІК] [НАЗВА КОМПАНІЇ]. Всі права захищені.</span>
+      <div style="display:flex;gap:16px;">
+        <a href="#">Політика конфіденційності</a>
+        <a href="#">Договір оферти</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- LEAD MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3>Залишити заявку</h3>
+    <div class="modal-sub">Ми зв'яжемося з вами протягом [ТЕРМІН] хвилин</div>
+    <form onsubmit="submitLead(event)">
+      <div class="form-group">
+        <label class="form-label">Ваше ім'я</label>
+        <input type="text" class="form-input" placeholder="Іван Іваненко" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Телефон</label>
+        <input type="tel" class="form-input" placeholder="+380XXXXXXXXX" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Регіон</label>
+        <select class="form-input form-select">
+          <option>[МІСТО]</option>
+          <option>Київ</option><option>Харків</option><option>Дніпро</option>
+          <option>Одеса</option><option>Львів</option><option>Запоріжжя</option>
+          <option>Вінниця</option><option>Чернігів</option><option>Полтава</option>
+          <option>Суми</option><option>Рівне</option><option>Хмельницький</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Спосіб зв'язку</label>
+        <div class="contact-method">
+          <button type="button" class="cm-btn active" onclick="selectCm(this)">📞 Телефон</button>
+          <button type="button" class="cm-btn" onclick="selectCm(this)">💬 Viber</button>
+          <button type="button" class="cm-btn" onclick="selectCm(this)">✈️ Telegram</button>
+        </div>
+      </div>
+      <button type="submit" class="form-submit">Надіслати заявку →</button>
+      <div class="form-note">Натискаючи кнопку, ви погоджуєтесь з <a href="#">політикою конфіденційності</a></div>
+    </form>
+  </div>
+</div>
+
+<script>
+  /* ── MODAL ── */
+  function openModal()  { document.getElementById('modal').classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeModal() { document.getElementById('modal').classList.remove('open'); document.body.style.overflow=''; }
+  document.getElementById('modal').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
+
+  /* ── TABS ── */
+  function switchTab(prefix, id, btn) {
+    document.querySelectorAll(`[id^="${prefix}-"]`).forEach(p => p.classList.remove('active'));
+    document.getElementById(`${prefix}-${id}`).classList.add('active');
+    btn.closest('.tabs').querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  /* ── FAQ ── */
+  function toggleFaq(btn) {
+    btn.closest('.faq-item').classList.toggle('open');
+  }
+
+  /* ── CONTACT METHOD ── */
+  function selectCm(btn) {
+    btn.closest('.contact-method').querySelectorAll('.cm-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  /* ── HERO TYPE ── */
+  const heroData = {
+    home: { power:'10 кВт', save:'60,000 грн', roi:'3–4 роки' },
+    biz:  { power:'100 кВт', save:'600,000 грн', roi:'2–3 роки' },
+  };
+  function switchHeroType(btn, type) {
+    btn.closest('.hero-type-btns').querySelectorAll('.hero-type-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const d = heroData[type];
+    document.getElementById('hs-power').innerHTML = `<span>${d.power.split(' ')[0]}</span> ${d.power.split(' ')[1]}`;
+    document.getElementById('hs-save').innerHTML  = `<span>${d.save.split(' ')[0]}</span> ${d.save.split(' ')[1]}`;
+    document.getElementById('hs-roi').innerHTML   = `<span>${d.roi.split(' ')[0]}</span> ${d.roi.split(' ').slice(1).join(' ')}`;
+  }
+
+  /* ── CALCULATOR ── */
+  function calcUpdate() {
+    const kwh  = parseFloat(document.getElementById('c-kwh').value) || 500;
+    const type = document.getElementById('c-type').value;
+    const mult = type === 'biz' ? 5 : 1;
+    const power  = Math.ceil(kwh / 120 * mult);
+    const cost   = Math.round(power * 35000);
+    const save   = Math.round(kwh * 12 * 2.64 * (type==='biz'?1:0.9));
+    const roi    = (cost / save).toFixed(1);
+    document.getElementById('r-power').textContent = power + ' кВт';
+    document.getElementById('r-cost').textContent  = 'від ' + cost.toLocaleString('uk-UA') + ' ₴';
+    document.getElementById('r-save').textContent  = '~' + save.toLocaleString('uk-UA') + ' ₴';
+    document.getElementById('r-roi').textContent   = roi + ' роки';
+  }
+
+  /* ── LEAD FORM ── */
+  function submitLead(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('[type=submit]');
+    btn.textContent = 'Відправляємо…';
+    btn.disabled = true;
+    // TODO: підключити до Telegram або CRM
+    setTimeout(() => {
+      btn.textContent = '✅ Заявку прийнято!';
+      btn.style.background = '#16a34a';
+      setTimeout(() => { closeModal(); }, 1500);
+    }, 1000);
+  }
+
+  /* Duplicate clients track for infinite scroll */
+  (function() {
+    const track = document.getElementById('clients-track');
+    if (track) {
+      const clone = track.cloneNode(true);
+      clone.setAttribute('aria-hidden','true');
+      track.parentNode.appendChild(clone);
+    }
+  })();
+</script>
+</body>
+</html>
