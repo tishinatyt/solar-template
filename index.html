@@ -429,7 +429,13 @@
 
     /* ── PROCESS ── */
     .process-steps {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    @media (max-width: 720px) {
+      .process-steps { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 460px) {
+      .process-steps { grid-template-columns: 1fr; }
     }
     .step-card {
       background: var(--white); border: 1px solid var(--border);
