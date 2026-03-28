@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Завантажити матеріали | Solar Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:  #f97316;
+      --orange2: #ea580c;
+      --ora-lt:  #fff7ed;
+      --bg:      #f9fafb;
+      --white:   #ffffff;
+      --text:    #0f172a;
+      --mid:     #475569;
+      --muted:   #94a3b8;
+      --border:  #e2e8f0;
+      --green:   #16a34a;
+      --green-lt:#f0fdf4;
+      --red:     #dc2626;
+      --red-lt:  #fef2f2;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg); color: var(--text);
+      min-height: 100vh; line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--white); border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+    }
+    .header-inner {
+      max-width: 680px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .logo-mark {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, #f97316, #fbbf24);
+      border-radius: 9px; display: flex; align-items: center;
+      justify-content: center; font-size: 17px; flex-shrink: 0;
+    }
+    .logo-text { font-size: 18px; font-weight: 800; color: var(--text); }
+    .logo-text span { color: var(--orange); }
+
+    /* ── HERO STRIP ── */
+    .hero-strip {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+      padding: 40px 24px 36px; text-align: center;
+    }
+    .hero-strip h1 {
+      font-size: clamp(20px, 4vw, 28px); font-weight: 800;
+      color: #fff; margin-bottom: 8px; letter-spacing: -.3px;
+    }
+    .hero-strip p { font-size: 15px; color: rgba(255,255,255,.62); }
+
+    /* ── FORM WRAPPER ── */
+    .form-wrap {
+      max-width: 680px; margin: 0 auto; padding: 36px 24px 60px;
+    }
+
+    /* ── FORM CARD ── */
+    .form-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 16px; padding: 36px; margin-bottom: 16px;
+    }
+    .card-title {
+      font-size: 16px; font-weight: 700; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card-title-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      background: var(--ora-lt); display: flex; align-items: center;
+      justify-content: center; font-size: 15px;
+    }
+
+    /* ── FORM FIELDS ── */
+    .field { margin-bottom: 20px; }
+    .field:last-child { margin-bottom: 0; }
+    .field-label {
+      display: block; font-size: 13px; font-weight: 600;
+      color: var(--mid); margin-bottom: 7px;
+    }
+    .field-label .req { color: var(--orange); margin-left: 2px; }
+    .field-input {
+      width: 100%; padding: 12px 16px;
+      border: 1.5px solid var(--border); border-radius: 10px;
+      font-family: 'Inter', sans-serif; font-size: 15px;
+      color: var(--text); background: var(--bg); outline: none;
+      transition: border-color .15s, box-shadow .15s, background .15s;
+    }
+    .field-input:focus {
+      border-color: var(--orange); background: var(--white);
+      box-shadow: 0 0 0 3px rgba(249,115,22,.1);
+    }
+    textarea.field-input { resize: vertical; min-height: 100px; line-height: 1.6; }
+
+    /* ── DROPZONE ── */
+    .dropzone {
+      border: 2px dashed var(--border); border-radius: 12px;
+      padding: 28px 20px; text-align: center; cursor: pointer;
+      transition: border-color .15s, background .15s;
+      position: relative;
+    }
+    .dropzone:hover, .dropzone.drag { border-color: var(--orange); background: var(--ora-lt); }
+    .dropzone input[type="file"] {
+      position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%;
+    }
+    .dz-icon { font-size: 32px; margin-bottom: 8px; }
+    .dz-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .dz-hint { font-size: 13px; color: var(--muted); }
+    .dz-hint span { color: var(--orange); font-weight: 600; }
+
+    /* ── FILE LIST ── */
+    .file-list {
+      display: flex; flex-direction: column; gap: 8px; margin-top: 12px;
+    }
+    .file-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; background: var(--bg);
+      border: 1px solid var(--border); border-radius: 8px;
+    }
+    .file-item-icon { font-size: 18px; flex-shrink: 0; }
+    .file-item-name { font-size: 13px; font-weight: 600; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .file-item-size { font-size: 12px; color: var(--muted); flex-shrink: 0; font-family: 'DM Mono', monospace; }
+    .file-item-remove {
+      width: 22px; height: 22px; border-radius: 6px;
+      background: none; border: none; cursor: pointer;
+      font-size: 14px; color: var(--muted); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .12s, color .12s;
+    }
+    .file-item-remove:hover { background: var(--red-lt); color: var(--red); }
+    .file-count-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 12px; font-weight: 600; color: var(--orange);
+      background: var(--ora-lt); padding: 3px 10px; border-radius: 999px;
+      margin-top: 6px;
+    }
+
+    /* ── IMAGE PREVIEW ── */
+    .img-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: 8px; margin-top: 12px;
+    }
+    .img-thumb {
+      aspect-ratio: 1; border-radius: 8px; overflow: hidden;
+      background: var(--bg); border: 1px solid var(--border);
+      position: relative;
+    }
+    .img-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .img-thumb-num {
+      position: absolute; top: 4px; left: 4px;
+      background: rgba(0,0,0,.55); color: #fff;
+      font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px;
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── LOGO PREVIEW ── */
+    .logo-preview {
+      display: none; margin-top: 12px;
+      padding: 12px; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 8px; align-items: center; gap: 12px;
+    }
+    .logo-preview.show { display: flex; }
+    .logo-preview img { max-height: 52px; max-width: 120px; object-fit: contain; }
+    .logo-preview-name { font-size: 13px; font-weight: 600; flex: 1; }
+    .logo-preview-size { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; }
+
+    /* ── SUBMIT ── */
+    .submit-btn {
+      width: 100%; padding: 16px; margin-top: 8px;
+      background: var(--orange); color: #fff; border: none;
+      border-radius: 999px; font-family: 'Inter', sans-serif;
+      font-size: 16px; font-weight: 700; cursor: pointer;
+      transition: background .15s, transform .15s, box-shadow .15s;
+      box-shadow: 0 4px 20px rgba(249,115,22,.3);
+    }
+    .submit-btn:hover:not(:disabled) {
+      background: var(--orange2); transform: translateY(-1px);
+      box-shadow: 0 8px 28px rgba(249,115,22,.4);
+    }
+    .submit-btn:disabled { opacity: .65; cursor: not-allowed; transform: none; }
+
+    /* ── PROGRESS ── */
+    .progress-wrap {
+      display: none; background: var(--white); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px; margin-top: 16px;
+    }
+    .progress-wrap.show { display: block; }
+    .progress-title { font-size: 15px; font-weight: 700; margin-bottom: 16px; }
+    .progress-list { display: flex; flex-direction: column; gap: 10px; }
+    .progress-item { display: flex; align-items: center; gap: 10px; }
+    .pi-icon { font-size: 16px; flex-shrink: 0; width: 22px; text-align: center; }
+    .pi-label { font-size: 14px; flex: 1; }
+    .pi-status {
+      font-size: 12px; font-weight: 600; padding: 2px 10px;
+      border-radius: 999px; flex-shrink: 0;
+    }
+    .pi-status.wait  { background: var(--bg); color: var(--muted); }
+    .pi-status.doing { background: #eff6ff; color: #1e40af; }
+    .pi-status.done  { background: var(--green-lt); color: var(--green); }
+    .pi-status.err   { background: var(--red-lt); color: var(--red); }
+
+    /* ── SUCCESS ── */
+    .success-block {
+      display: none; text-align: center;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 16px; padding: 48px 32px;
+    }
+    .success-block.show { display: block; }
+    .success-icon { font-size: 52px; margin-bottom: 16px; }
+    .success-title { font-size: 22px; font-weight: 800; margin-bottom: 10px; }
+    .success-sub { font-size: 15px; color: var(--mid); margin-bottom: 28px; line-height: 1.6; }
+    .success-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px; background: var(--orange); color: #fff;
+      border-radius: 999px; font-size: 15px; font-weight: 700;
+      text-decoration: none; transition: background .15s;
+    }
+    .success-link:hover { background: var(--orange2); }
+
+    /* ── ERROR BLOCK ── */
+    .error-block {
+      display: none; padding: 16px 20px; background: var(--red-lt);
+      border: 1px solid rgba(220,38,38,.3); border-radius: 10px;
+      font-size: 14px; font-weight: 600; color: var(--red); margin-top: 12px;
+    }
+    .error-block.show { display: block; }
+
+    @media (max-width: 480px) {
+      .form-card { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-mark">☀️</div>
+    <div class="logo-text">[НАЗВА]<span>Solar</span></div>
+  </div>
+</header>
+
+<div class="hero-strip">
+  <h1>Завантажити фото та матеріали</h1>
+  <p>Надішліть нам фото об'єкту, логотип та відео — ми підготуємо для вас сайт</p>
+</div>
+
+<div class="form-wrap">
+  <form id="uploadForm">
+
+    <!-- Ім'я клієнта -->
+    <div class="form-card">
+      <div class="card-title">
+        <div class="card-title-icon">👤</div>
+        Інформація про клієнта
+      </div>
+      <div class="field">
+        <label class="field-label">Ваше ім'я або назва компанії<span class="req">*</span></label>
+        <input type="text" id="f_name" class="field-input" placeholder="Наприклад: Іван Петренко або ТОВ «Будсервіс»" required />
+      </div>
+      <div class="field">
+        <label class="field-label">Коментар або побажання</label>
+        <textarea id="f_comment" class="field-input" placeholder="Опишіть що важливо враховати: стиль, кольори, особливості об'єкту..."></textarea>
+      </div>
+    </div>
+
+    <!-- Фото об'єктів -->
+    <div class="form-card">
+      <div class="card-title">
+        <div class="card-title-icon">📷</div>
+        Фото об'єктів
+      </div>
+      <div class="dropzone" id="dz_photos"
+           ondragover="dzDrag(event,'dz_photos',true)"
+           ondragleave="dzDrag(event,'dz_photos',false)"
+           ondrop="dzDrop(event,'photos')">
+        <input type="file" id="f_photos" accept="image/*" multiple onchange="handlePhotos(this)" />
+        <div class="dz-icon">🏗️</div>
+        <div class="dz-title">Перетягніть фото або <span style="color:var(--orange)">оберіть файли</span></div>
+        <div class="dz-hint">JPG, PNG, WEBP · до <span>20 фото</span> · макс. 50 МБ кожне</div>
+      </div>
+      <div id="photos_grid" class="img-grid"></div>
+      <div id="photos_count" style="display:none;" class="file-count-badge">
+        <span>📷</span> <span id="photos_num">0</span> фото обрано
+      </div>
+    </div>
+
+    <!-- Логотип -->
+    <div class="form-card">
+      <div class="card-title">
+        <div class="card-title-icon">🎨</div>
+        Логотип компанії
+      </div>
+      <div class="dropzone" id="dz_logo"
+           ondragover="dzDrag(event,'dz_logo',true)"
+           ondragleave="dzDrag(event,'dz_logo',false)"
+           ondrop="dzDrop(event,'logo')">
+        <input type="file" id="f_logo" accept="image/*,.pdf,.svg,.ai,.eps,.psd" onchange="handleLogo(this)" />
+        <div class="dz-icon">🖼️</div>
+        <div class="dz-title">Перетягніть логотип або <span style="color:var(--orange)">оберіть файл</span></div>
+        <div class="dz-hint">PNG, SVG, AI, PDF, EPS, PSD · 1 файл</div>
+      </div>
+      <div id="logo_preview" class="logo-preview">
+        <img id="logo_img" src="" alt="preview" />
+        <div>
+          <div class="logo-preview-name" id="logo_name"></div>
+          <div class="logo-preview-size" id="logo_size"></div>
+        </div>
+        <button type="button" class="file-item-remove" onclick="removeLogo()">✕</button>
+      </div>
+    </div>
+
+    <!-- Відео -->
+    <div class="form-card">
+      <div class="card-title">
+        <div class="card-title-icon">🎬</div>
+        Відео об'єкту
+      </div>
+      <div class="dropzone" id="dz_video"
+           ondragover="dzDrag(event,'dz_video',true)"
+           ondragleave="dzDrag(event,'dz_video',false)"
+           ondrop="dzDrop(event,'video')">
+        <input type="file" id="f_video" accept="video/*" onchange="handleVideo(this)" />
+        <div class="dz-icon">🎥</div>
+        <div class="dz-title">Перетягніть відео або <span style="color:var(--orange)">оберіть файл</span></div>
+        <div class="dz-hint">MP4, MOV, AVI · 1 файл · макс. 50 МБ</div>
+      </div>
+      <div id="video_item" class="file-list" style="display:none;"></div>
+    </div>
+
+    <button type="submit" class="submit-btn" id="submit_btn">
+      Надіслати матеріали →
+    </button>
+    <div id="error_block" class="error-block"></div>
+
+  </form><!-- /form -->
+
+  <!-- Progress -->
+  <div class="progress-wrap" id="progress_wrap">
+    <div class="progress-title">⏳ Надсилаємо матеріали…</div>
+    <div class="progress-list" id="progress_list"></div>
+  </div>
+
+  <!-- Success -->
+  <div class="success-block" id="success_block">
+    <div class="success-icon">✅</div>
+    <div class="success-title">Матеріали отримано!</div>
+    <div class="success-sub">Дякуємо! Ми отримали всі ваші файли та зв'яжемось з вами найближчим часом.</div>
+    <a href="https://t.me/cryptomaus" target="_blank" class="success-link">✈️ Написати нам у Telegram</a>
+  </div>
+</div><!-- /form-wrap -->
+
+<script>
+  const TG_TOKEN   = '8741925031:AAHacGEzHZFa3OHe81g1C07tTEBEr-jVaHk';
+  const TG_CHAT_ID = '503549265';
+
+  // ── State ──
+  let photoFiles  = [];
+  let logoFile    = null;
+  let videoFile   = null;
+
+  // ── Drag & drop helpers ──
+  function dzDrag(e, id, active) {
+    e.preventDefault();
+    document.getElementById(id).classList.toggle('drag', active);
+  }
+  function dzDrop(e, type) {
+    e.preventDefault();
+    const files = e.dataTransfer.files;
+    if (!files.length) return;
+    if (type === 'photos') {
+      const input = document.getElementById('f_photos');
+      const dt = new DataTransfer();
+      [...files].forEach(f => { if (f.type.startsWith('image/')) dt.items.add(f); });
+      input.files = dt.files;
+      handlePhotos(input);
+    } else if (type === 'logo') {
+      const input = document.getElementById('f_logo');
+      const dt = new DataTransfer();
+      dt.items.add(files[0]);
+      input.files = dt.files;
+      handleLogo(input);
+    } else if (type === 'video') {
+      const input = document.getElementById('f_video');
+      const dt = new DataTransfer();
+      dt.items.add(files[0]);
+      input.files = dt.files;
+      handleVideo(input);
+    }
+    document.getElementById('dz_' + type)?.classList.remove('drag');
+  }
+
+  // ── Photo handler ──
+  function handlePhotos(input) {
+    const MAX = 20;
+    const newFiles = [...input.files].slice(0, MAX - photoFiles.length);
+    photoFiles = [...photoFiles, ...newFiles].slice(0, MAX);
+    renderPhotoGrid();
+  }
+  function renderPhotoGrid() {
+    const grid  = document.getElementById('photos_grid');
+    const count = document.getElementById('photos_count');
+    const num   = document.getElementById('photos_num');
+    grid.innerHTML = '';
+    if (!photoFiles.length) { count.style.display = 'none'; return; }
+    count.style.display = 'inline-flex';
+    num.textContent = photoFiles.length;
+    photoFiles.forEach((f, i) => {
+      const div = document.createElement('div');
+      div.className = 'img-thumb';
+      const url = URL.createObjectURL(f);
+      div.innerHTML = `<img src="${url}" /><span class="img-thumb-num">${i+1}</span>`;
+      div.title = f.name;
+      grid.appendChild(div);
+    });
+  }
+
+  // ── Logo handler ──
+  function handleLogo(input) {
+    if (!input.files[0]) return;
+    logoFile = input.files[0];
+    const isImg = logoFile.type.startsWith('image/');
+    const preview = document.getElementById('logo_preview');
+    const img     = document.getElementById('logo_img');
+    const name    = document.getElementById('logo_name');
+    const size    = document.getElementById('logo_size');
+    name.textContent = logoFile.name;
+    size.textContent = formatSize(logoFile.size);
+    if (isImg) { img.src = URL.createObjectURL(logoFile); img.style.display = 'block'; }
+    else        { img.style.display = 'none'; }
+    preview.classList.add('show');
+  }
+  function removeLogo() {
+    logoFile = null;
+    document.getElementById('f_logo').value = '';
+    document.getElementById('logo_preview').classList.remove('show');
+  }
+
+  // ── Video handler ──
+  function handleVideo(input) {
+    if (!input.files[0]) return;
+    videoFile = input.files[0];
+    const container = document.getElementById('video_item');
+    container.style.display = 'flex';
+    container.innerHTML = `
+      <div class="file-item">
+        <span class="file-item-icon">🎬</span>
+        <span class="file-item-name">${videoFile.name}</span>
+        <span class="file-item-size">${formatSize(videoFile.size)}</span>
+        <button type="button" class="file-item-remove" onclick="removeVideo()">✕</button>
+      </div>`;
+  }
+  function removeVideo() {
+    videoFile = null;
+    document.getElementById('f_video').value = '';
+    document.getElementById('video_item').style.display = 'none';
+  }
+
+  // ── Format helpers ──
+  function formatSize(bytes) {
+    if (bytes < 1024)       return bytes + ' Б';
+    if (bytes < 1024*1024)  return (bytes/1024).toFixed(1) + ' КБ';
+    return (bytes/1024/1024).toFixed(1) + ' МБ';
+  }
+
+  // ── Progress UI ──
+  function buildProgressList(items) {
+    const list = document.getElementById('progress_list');
+    list.innerHTML = '';
+    items.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'progress-item';
+      div.id = 'pi_' + item.id;
+      div.innerHTML = `
+        <span class="pi-icon">${item.icon}</span>
+        <span class="pi-label">${item.label}</span>
+        <span class="pi-status wait" id="pis_${item.id}">Очікування</span>`;
+      list.appendChild(div);
+    });
+  }
+  function setStatus(id, state, text) {
+    const el = document.getElementById('pis_' + id);
+    if (!el) return;
+    el.className = 'pi-status ' + state;
+    el.textContent = text;
+  }
+
+  // ── Telegram senders ──
+  async function tgSendMessage(text) {
+    const r = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: TG_CHAT_ID, text, parse_mode: 'HTML' }),
+    });
+    if (!r.ok) throw new Error('TG message error ' + r.status);
+  }
+
+  async function tgSendFile(file, caption, method = 'sendDocument', fieldName = 'document') {
+    const fd = new FormData();
+    fd.append('chat_id', TG_CHAT_ID);
+    fd.append(fieldName, file, file.name);
+    if (caption) fd.append('caption', caption);
+    const r = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/${method}`, {
+      method: 'POST', body: fd,
+    });
+    if (!r.ok) {
+      const err = await r.json().catch(() => ({}));
+      throw new Error((err.description || 'TG file error') + ' ' + r.status);
+    }
+  }
+
+  // ── SUBMIT ──
+  document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name    = document.getElementById('f_name').value.trim();
+    const comment = document.getElementById('f_comment').value.trim();
+
+    if (!name) {
+      showError("Будь ласка, вкажіть ваше ім'я.");
+      document.getElementById('f_name').focus();
+      return;
+    }
+
+    // Build progress items list
+    const progressItems = [{ id: 'summary', icon: '📋', label: 'Основна інформація' }];
+    photoFiles.forEach((f, i) => progressItems.push({ id: 'photo_' + i, icon: '📷', label: `Фото ${i+1}: ${f.name}` }));
+    if (logoFile)  progressItems.push({ id: 'logo',  icon: '🎨', label: `Логотип: ${logoFile.name}` });
+    if (videoFile) progressItems.push({ id: 'video', icon: '🎬', label: `Відео: ${videoFile.name}` });
+
+    // UI: show progress, hide form
+    document.getElementById('submit_btn').disabled = true;
+    document.getElementById('error_block').classList.remove('show');
+    document.getElementById('progress_wrap').classList.add('show');
+    buildProgressList(progressItems);
+    document.getElementById('uploadForm').style.opacity = '.4';
+    document.getElementById('uploadForm').style.pointerEvents = 'none';
+
+    try {
+      // 1. Summary text
+      setStatus('summary', 'doing', 'Надсилаємо…');
+      const photoNames = photoFiles.map((f, i) => `  ${i+1}. ${f.name} (${formatSize(f.size)})`).join('\n');
+      const summaryText = [
+        '📁 <b>Нові матеріали від клієнта</b>',
+        '',
+        `👤 <b>Клієнт:</b> ${name}`,
+        comment ? `💬 <b>Коментар:</b> ${comment}` : '',
+        '',
+        photoFiles.length ? `📷 <b>Фото (${photoFiles.length} шт.):</b>\n${photoNames}` : '📷 Фото: не завантажено',
+        logoFile  ? `🎨 <b>Логотип:</b> ${logoFile.name} (${formatSize(logoFile.size)})` : '🎨 Логотип: не завантажено',
+        videoFile ? `🎬 <b>Відео:</b> ${videoFile.name} (${formatSize(videoFile.size)})` : '🎬 Відео: не завантажено',
+      ].filter(Boolean).join('\n');
+
+      await tgSendMessage(summaryText);
+      setStatus('summary', 'done', '✓ Надіслано');
+
+      // 2. Photos
+      for (let i = 0; i < photoFiles.length; i++) {
+        const id = 'photo_' + i;
+        setStatus(id, 'doing', 'Надсилаємо…');
+        const caption = `📷 Фото ${i+1}/${photoFiles.length} від ${name}`;
+        await tgSendFile(photoFiles[i], caption, 'sendPhoto', 'photo');
+        setStatus(id, 'done', '✓ Надіслано');
+      }
+
+      // 3. Logo
+      if (logoFile) {
+        setStatus('logo', 'doing', 'Надсилаємо…');
+        await tgSendFile(logoFile, `🎨 Логотип від ${name}`, 'sendDocument', 'document');
+        setStatus('logo', 'done', '✓ Надіслано');
+      }
+
+      // 4. Video
+      if (videoFile) {
+        setStatus('video', 'doing', 'Надсилаємо…');
+        await tgSendFile(videoFile, `🎬 Відео від ${name}`, 'sendDocument', 'document');
+        setStatus('video', 'done', '✓ Надіслано');
+      }
+
+      // Success
+      document.getElementById('progress_wrap').classList.remove('show');
+      document.getElementById('success_block').classList.add('show');
+      document.getElementById('uploadForm').style.display = 'none';
+
+    } catch (err) {
+      console.error(err);
+      document.getElementById('progress_wrap').classList.remove('show');
+      document.getElementById('uploadForm').style.opacity = '1';
+      document.getElementById('uploadForm').style.pointerEvents = '';
+      document.getElementById('submit_btn').disabled = false;
+      showError('Помилка надсилання: ' + err.message + '. Спробуйте ще раз або напишіть нам напряму в Telegram.');
+    }
+  });
+
+  function showError(msg) {
+    const el = document.getElementById('error_block');
+    el.textContent = '❌ ' + msg;
+    el.classList.add('show');
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+</script>
+</body>
+</html>
